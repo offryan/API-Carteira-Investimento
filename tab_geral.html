@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo.css">
+    <title>Projeto PW</title>
+</head>
+
+<body>
+    <main>
+        <article id="container">
+            <h1>Tabela geral dos FII</h1>
+            <table>
+                <tr>
+                    <th>Fundo</th>
+                    <th>Setor</th>
+                    <th>Data base</th>
+                    <th>Data pagamento</th>
+                    <th>Próximo provento</th>
+                    <th>Cotação atual</th>
+                    <th>Qtd Cotas</th>
+                    <th>Total investido</th>
+                    <th>Preço médio</th>
+                    <th>Rendimento</th>
+                    <th>DY 12 meses</th>
+                    <th>Rendimento médio (24m)</th>
+                </tr>
+                <tbody id="data-output"></tbody>
+          
+                <tr class="fundo_total">
+                    <th colspan="4">Total Geral</th>
+                    <th id="Cotacao-Atual">-</th>
+                    <th id="Total-Provento"></th>
+                    <th id="Total-Cotas"></th>
+                    <th id="Total-investido"></th>
+                    <th>-</th>
+                    <th>-</th>
+                    <th>-</th>
+                    <th>-</th>
+                </tr>
+                <tbody id="data-output2"></tbody>
+            </table>
+
+            <img src="imagens/aguarde_carregando.gif" id="loading"> 
+
+        </article>
+    </main>
+
+    <script src="js/tabela_geral.js"></script>
+</body>
+
+</html>
