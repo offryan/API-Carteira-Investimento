@@ -21,6 +21,11 @@ table{
     width: 100%;
 }
 
+
+.aa{
+    height: 250px;
+}
+
 td,th{
     border: 1px solid #000;
     padding: 10px;
@@ -47,7 +52,7 @@ h1{
 
 #loader{
     display: block;
-    width: 1500px;
+    width: 650px;
     margin: auto;
     margin-bottom: 500px;
 }
