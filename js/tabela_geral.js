@@ -150,7 +150,7 @@ function exibirTabela() {
             
             let linhasTab = document.querySelectorAll("tr");
             
-                // console.log(linhasTab)
+                console.log(linhasTab)
 
                 // O método split() divide uma String em uma lista ordenada de substrings,
                 // coloca essas substrings em um array e retorna o array.
