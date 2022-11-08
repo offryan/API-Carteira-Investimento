@@ -6,6 +6,7 @@ async function carregarDadosUser(url) {
         .then(resp => resp.json())
         .then(json => fii_user = json);
     carregarDadosFundos();
+
     console.log(fii_user)
 }
 
@@ -17,6 +18,7 @@ async function carregarDadosFundos() {
         fii_table.push(json);
     }
     console.log(fii_table)
+
     exibirTabela();
 }
 
@@ -36,17 +38,15 @@ function exibirTabela() {
         let dataBase = '';
         let dataPag = '';
         let totalgasto = `${fii_user[i].totalgasto}`;
+
+        // Calculo Preço Médio:
         let precMed = fii_user[i].totalgasto / fii_user[i].qtde;
         let dividendYield = `${fii_table[i].dividendYield}`;
 
-        // === (Valor e Tipo igual) - é usado para a comparação entre duas variáveis, mas isso irá verificar o tipo estrito, o que significa que ele irá verificar o tipo de dados e comparar dois valores.
+        // === (Valor e Tipo igual) - ele irá verificar o tipo de dados e comparar dois valores.
 
-        // EXEMPLO: 
-
-        // Para x= 10 temos que :
-        // x ===    8  -> retorna false
-        // x ===   10   -> retorna true
-        // x === "10" -> retorna false
+        // Se a data do próximo rendimento não tiver sido especificado "-" a tabela pegará o último rendimento,
+        // caso contrário pegará a data do próximo rendimento.
 
         if (fii_table[i].proximoRendimento.rendimento === '-') {
 
@@ -55,6 +55,7 @@ function exibirTabela() {
 
             proxProv = fii_table[i].proximoRendimento.rendimento;
         }
+
         if (fii_table[i].proximoRendimento.dataBase === '-') {
 
             dataBase = `${fii_table[i].ultimoRendimento.dataBase}`;
@@ -71,7 +72,7 @@ function exibirTabela() {
             dataPag = `${fii_table[i].proximoRendimento.dataPag}`;
         }
 
-        // CALCULO RENDIMENTO
+        // CALCULO DO RENDIMENTO:
 
         let rendimento = proxProv * 100 / cotAtual;
 
@@ -103,6 +104,8 @@ function exibirTabela() {
 
             for (let i = 0; i < fii_user.length; i++) {
 
+                // CALCULO PROVENTO: (+= concatena as strings)
+
                 proxProv += fii_user[i].qtde * fii_table[i].ultimoRendimento.rendimento;
                 provento = proxProv;
 
@@ -110,19 +113,17 @@ function exibirTabela() {
 
             } totalTab1.innerHTML = out1;
 
-            // TOTAL COTAS
+            // CÉLULA - TOTAL AÇÕES:
 
             totalTab2 = document.querySelector("#Total-Cotas");
 
             for (let i = 0; i < fii_user.length; i++) {
 
-            // SOMA DAS AÇÕES:
-
-                out2 += `< tr > <td>${"R$:", fii_table[i].qtde}</td></tr > `;
+                out2 += `< tr > <td>${"R$:", fii_table[i].qtde}</td></tr >`;
 
             } totalTab2.innerHTML = out2;
 
-            // TOTAL INVESTIDO
+            // CÉLULA - TOTAL INVESTIDO:
 
             totalTab3 = document.querySelector("#Total-investido");
 
@@ -132,23 +133,35 @@ function exibirTabela() {
 
             for (let i = 0; i < fii_table.length; i++) {
 
+                // TOTAL QUANTIDADE:
                 totalQtde += fii_user[i].qtde;
+
+                // TOTAL PROXIMO PROVENTO:
                 totalProxProv += Number(fii_user[i].qtde + fii_table[i].ultimoRendimento.rendimento); 
+
+                // TOTAL INVESTIDO:
                 totalInv += fii_user[i].totalgasto;               
             }
             
             let totalCotas = document.querySelector("#Total-Cotas")
+
             totalCotas.innerHTML = totalQtde;
             totalTab3.innerHTML = "R$" + totalInv.toFixed(2);
             
             let linhasTab = document.querySelectorAll("tr");
             
-            // console.log(linhasTab)
+                // console.log(linhasTab)
 
-            for (linha of linhasTab) {
-                let v = Number(linha.children[9].innerText.split("%")[0]) 
+                // O método split() divide uma String em uma lista ordenada de substrings,
+                // coloca essas substrings em um array e retorna o array.
 
-            // console.log(v)
+                for (linha of linhasTab) {
+                let v = Number(linha.children[9].innerText.split("%")[0])
+
+                // linha.children[9] está pegando a posição 9 nas linhas da tabela e
+                // verificando se o rendimento é 0.6
+                
+                //console.log(v) // Rendimentos
 
                 if (v > 0.6) {
                     linha.classList.add('positivo');
