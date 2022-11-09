@@ -169,5 +169,8 @@ function exibirTabela() {
                 else if (v <= 0.6){
                     linha.classList.add('negativo');
                 }
+
+                // Faz o gif sumir após a tabela carregar: 
+                document.getElementById("loader").style.display = "none";
             }
 }
